@@ -1,11 +1,11 @@
-output "autoscaling_group_name" {
-  description = "Name of the Auto Scaling Group"
-  value       = aws_autoscaling_group.web_asg.name
+output "alb_dns_name" {
+  description = "DNS name of the ALB"
+  value       = aws_alb.alb.dns_name
 }
 
-output "alb_dns_name" {
-  description = "The domain name of the load balancer"
-  value       = aws_lb.web_alb.dns_name
+output "asg_name" {
+  description = "Name of the Auto Scaling Group"
+  value       = aws_autoscaling_group.asg.name
 }
 
 output "vpc_id" {
@@ -14,6 +14,6 @@ output "vpc_id" {
 }
 
 output "public_subnet_ids" {
-  description = "Public subnet IDs"
-  value       = aws_subnet.public_subnets[*].id
+  description = "List of public subnet IDs"
+  value       = [for s in aws_subnet.public : s.id]
 }
